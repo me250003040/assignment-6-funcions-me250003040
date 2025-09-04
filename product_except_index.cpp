@@ -1,25 +1,19 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
 vector<long long> productExceptIndex(const vector<int>& arr) {
     int size = arr.size();
     vector<long long> output(size, 1);
 
-    // TODO: complete the function as per instructions
-    
-}
+    long long left_product = 1;
+    for (int i = 0; i < size; i++) {
+        output[i] = left_product;
+        left_product *= arr[i];
+    }
 
-int main() {
-    int n; cin >> n;
-    vector<int> arr(n);
-    for (int i=0; i<n; i++) cin >> arr[i];
+    long long right_product = 1;
+    for (int i = size - 1; i >= 0; i--) {
+        output[i] *= right_product;
+        right_product *= arr[i];
+    }
 
-    vector<long long> res = productExceptIndex(arr);
-    for(auto v : res)
-        cout << v << " ";
-    cout << "\n";
-
-    return 0;
+    return output;
 }
 
